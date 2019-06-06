@@ -5,11 +5,13 @@ from flask import g, current_app
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
-        db = g._database = sqlite3.connect(# Fill in later) 
+        db = g._database = sqlite3.connect(
+            current_app.config['DATABASE'] 
+        )
     return db
 
 # Add to 'teardown_appcontext' handler; Makes sure database connection is closed when Request ends
-@app.teardown_appcontext
+@current_app.teardown_appcontext
 def teardown_db():
     db = getattr(g, '_database', None)
     if db is not None:
