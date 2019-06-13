@@ -1,0 +1,29 @@
+<!doctype html>
+<title>Alignment App</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+    <h1>Gene Alignment!</h1>
+</nav>
+<section class="content">
+    <header>
+        {% from "_formhelpers.html" import render_field %}
+        <form method="post">
+            <dl>
+                {{ render_field(input_form.gene_name) }}
+                {{ render_field(input_form.gene_content) }}
+            </dl>
+            <p><input type=submit>         
+        </form>
+    </header>
+</section>
+<section class="content">
+    <p>
+        <pre>
+        {{ gene_data }}
+        </pre>
+    </p>
+    <p>
+    {{ session['user_id'] }}
+    </p>
+</section>
+

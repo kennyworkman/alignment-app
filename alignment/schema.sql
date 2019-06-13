@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS sequence;
 
 CREATE TABLE sequence(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEST UNIQUE NOT NULL,
+    user_id TEXT NOT NULL,
+    name TEXT NOT NULL,
     bases TEXT NOT NULL
 );
