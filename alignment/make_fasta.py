@@ -37,7 +37,7 @@ def run_clustalo(file):
         data = subprocess.run([CLUSTALO_PATH, "-i", file.name, "--outfmt=clustal", "--residuenumber"], capture_output=True, check=True)
         return data.stdout
     except subprocess.CalledProcessError as e:
-        raise e.stderr 
+        return e.stderr 
         
 def capture_alignment(gene_dict):
     """ Pass dictionary mapping gene names to genomic content. Converts data into fasta format and passes thistemporary file to the clustero aligner. Output information captured from standard output and returnded as a string.

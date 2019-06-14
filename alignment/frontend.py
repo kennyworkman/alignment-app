@@ -17,12 +17,17 @@ def index():
     user_id = session['user_id']
 
     input_form = InputForm(request.form)
-    if request.method == 'POST' and input_form.validate():
-        g.gene_name, g.gene_content = input_form.gene_name, input_form.gene_content 
-        insert_genes(session, g)
-   
-    gene_dict = get_gene_dict(session, 4)
-    #alignment = capture_alignment(gene_dict)
+    align_form = AlignForm(request.form)
+    #gene_data = "Please submit some genes for alignment"
 
-    return render_template('index.html', gene_data=gene_dict, input_form=input_form)
+    if input_form.gene_submit.data and input_form.validate():
+        g.gene_name = input_form.gene_name.data
+        g.gene_content = input_form.gene_content.data
+        insert_genes(session, g)
+    gene_data = gene_dict = get_gene_dict(session, 2)
+
+    if align_form.align_submit.data and align_form.validate():
+        gene_data = alignment = capture_alignment(gene_dict)
+   
+    return render_template('index.html', gene_data=gene_data, input_form=input_form, align_form = align_form)
     
