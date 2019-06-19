@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from dotenv import load_dotenv
 
 # Load ENV variables from .env file
@@ -26,6 +26,6 @@ def create_app():
     # Test page
     @app.route('/hello')
     def hello():
-        return 'Hello, World!'
+        return render_template('hello_world.html') 
 
     return app
