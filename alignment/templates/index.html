@@ -1,43 +1,38 @@
-<!doctype html>
-<title>Alignment App</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-    <h1>Gene Alignment!</h1>
-</nav>
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-<section class="content">
-    <header>
-        {% from "_formhelpers.html" import render_field, render_checked_field %}
-        <form method="post">
-            <dl>
+{% block title %}Gene Aligner{% endblock %}
+
+{% block navbar %}
+    <h1>Gene Alignment!</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-4">
+        {{ wtf.quick_form(input_form) }}
+    </div>
+
+    <div class="-md-4">
+        {{ wtf.quick_form(wipe_form) }}
+    </div>
+
+    <div class="alert alert-info" role="alert">
+            {{ db_message }}
+    </div>
+
+    <div class="container-fluid">
+    <pre>
+            {{ alignment_data }}
+    </pre>
+    </div>
+
+{% endblock %}
+
+                {{ input_form.csrf_token }}
                 {{ render_field(input_form.gene_name) }}
                 {{ render_field(input_form.gene_content) }}
                 {{ render_field(input_form.output_type) }}
                 {{ render_field(input_form.wrap_number) }}
 
                 {{ input_form.align_button }}
-            </dl>
-        </form>
-        <form method="post">
-            <d1>
                 {{ wipe_form.wipe_submit }}
-            </d1>
-        </form>
-    </header>
-<section class="content">
-   <header> 
-       <p>
-            <pre>
-            {{ db_message }}
-            </pre>
-       </p>
-   </header>
-   <header>
-       <p>
-            <pre>
-            {{ alignment_data }}
-            </pre>
-       </p>
-   </header>
-</section>
-

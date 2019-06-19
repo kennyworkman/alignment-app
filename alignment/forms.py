@@ -1,9 +1,10 @@
-from wtforms import Form, StringField, IntegerField, SubmitField, SelectField, validators
+from flask_wtf import FlaskForm
+from wtforms import Form, StringField, IntegerField, SubmitField, SelectField 
 
 from wtforms.validators import input_required, optional, ValidationError
 
 
-class InputForm(Form):
+class InputForm(FlaskForm):
     gene_name = StringField('Gene Name', [input_required()])
     gene_content = StringField('Gene Content', [input_required()])
     output_type = SelectField('Alignment Format', choices=[('clustal', 'Clustal'),
@@ -20,13 +21,5 @@ class InputForm(Form):
             if field.data and field.data < 0:
                 raise ValidationError(u'Must be Positive Number!')
 
-class WipeForm(Form):
+class WipeForm(FlaskForm):
     wipe_submit = SubmitField('Wipe') 
-    
-
-        
-        
-            
-
-
-

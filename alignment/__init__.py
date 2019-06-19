@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template
+from flask_bootstrap import Bootstrap, StaticCDN
 from dotenv import load_dotenv
 
 # Load ENV variables from .env file
@@ -11,6 +12,10 @@ def create_app():
         SECRET_KEY = 'test',
         DATABASE = os.path.join(app.instance_path, 'alignment.sql'),
     )
+
+    # Initialize Flask-Bootstrap extension
+    bootstrap = Bootstrap(app)
+    app.config['BOOTSTRAP_SERVE_LOCAL']
 
     try:
         os.makedirs(app.instance_path)
