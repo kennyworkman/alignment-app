@@ -4,40 +4,40 @@
 <nav>
     <h1>Gene Alignment!</h1>
 </nav>
+
 <section class="content">
     <header>
-        {% from "_formhelpers.html" import render_field %}
+        {% from "_formhelpers.html" import render_field, render_checked_field %}
         <form method="post">
             <dl>
                 {{ render_field(input_form.gene_name) }}
                 {{ render_field(input_form.gene_content) }}
-                {{ render_field(input_form.gene_submit) }}
+                {{ render_field(input_form.output_type) }}
+                {{ render_field(input_form.wrap_number) }}
 
+                {{ input_form.align_button }}
             </dl>
         </form>
-    </header>
-</section>
-<section class="content">
-    <header>
-        {% from "_formhelpers.html" import render_field %}
         <form method="post">
-            <dl>
-                {{ render_field(align_form.do_alignment) }}
-                {{ render_field(align_form.align_submit) }}
-
-            </dl>
+            <d1>
+                {{ wipe_form.wipe_submit }}
+            </d1>
         </form>
     </header>
-</section>
-
 <section class="content">
-    <p>
-        <pre>
-        {{ gene_data }}
-        </pre>
-    </p>
-    <p>
-    {{ session['user_id'] }}
-    </p>
+   <header> 
+       <p>
+            <pre>
+            {{ db_message }}
+            </pre>
+       </p>
+   </header>
+   <header>
+       <p>
+            <pre>
+            {{ alignment_data }}
+            </pre>
+       </p>
+   </header>
 </section>
 

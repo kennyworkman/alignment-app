@@ -36,17 +36,14 @@ def query_genes(session):
     cur.close()
     return genes
 
-def get_gene_dict(session, quantity=2):
+def get_gene_dict(session):
     """
     """
     gene_objects = query_genes(session)
-    if quantity > len(gene_objects):
-        return "Insufficient genes stored in database. You requested {} genes and there are {} genes in the database.".format(quantity, len(gene_objects))
 
     gene_dict = {}
-    for i in range(quantity):
-        row_object = gene_objects[i]
-        gene_dict[row_object['name']] = row_object['bases']
+    for gene_object in gene_objects:
+        gene_dict[gene_object['name']] = gene_object['bases']
     return gene_dict
 
 def wipe_genes():

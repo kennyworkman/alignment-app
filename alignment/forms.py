@@ -1,10 +1,32 @@
-from wtforms import Form, StringField, BooleanField, SubmitField, validators
+from wtforms import Form, StringField, IntegerField, SubmitField, SelectField, validators
+
+from wtforms.validators import input_required, optional, ValidationError
+
 
 class InputForm(Form):
-    gene_name = StringField('Gene Name', validators=[validators.input_required()])
-    gene_content = StringField('Gene Content', validators=[validators.input_required()])
-    gene_submit = SubmitField('Submit Gene')
+    gene_name = StringField('Gene Name', [input_required()])
+    gene_content = StringField('Gene Content', [input_required()])
+    output_type = SelectField('Alignment Format', choices=[('clustal', 'Clustal'),
+      ('fasta', 'Fasta'),
+      ('msf', 'Msf'),
+      ('phylip', 'Phylip'),
+      ('selex', 'Selex'),
+      ('stockholm', 'Stockholm'),
+      ('vienna', 'Vienna')])
+    wrap_number = IntegerField('Wrap Length', [optional()])
+    align_button = SubmitField('Align!')
 
-class AlignForm(Form):
-    do_alignment = BooleanField('Align?', validators=[validators.input_required()])
-    align_submit = SubmitField('Align!')
+    def validate_wrap_number(form, field):
+            if field.data and field.data < 0:
+                raise ValidationError(u'Must be Positive Number!')
+
+class WipeForm(Form):
+    wipe_submit = SubmitField('Wipe') 
+    
+
+        
+        
+            
+
+
+
