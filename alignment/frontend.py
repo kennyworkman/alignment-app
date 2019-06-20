@@ -3,7 +3,7 @@ from flask import (
 )
 from uuid import uuid1
 
-from alignment.forms import InputForm, WipeForm
+from alignment.forms import GeneForm, SettingsForm, WipeForm
 from alignment.db import insert_genes, get_gene_dict, wipe_genes, query_genes
 
 from alignment.make_fasta import capture_alignment
@@ -17,23 +17,22 @@ def index():
         session['user_id'] = str(uuid1())
     user_id = session['user_id']
 
-    input_form = InputForm()
+    gene_form = GeneForm()
+    settings_form = SettingsForm()
     wipe_form = WipeForm()
-
-    # Set default values for form fields
-#    output_format = input_form.output_type.data = 'clustal'
-#    wrap_num = input_form.wrap_number.data = 60
 
     output_format = 'clustal'
     wrap_num = 60
 
-    if input_form.validate_on_submit():
-        g.gene_name = input_form.gene_name.data
-        g.gene_content = input_form.gene_content.data
+    if gene_form.validate_on_submit():
+        g.gene_name = gene_form.gene_name.data
+        g.gene_content = gene_form.gene_content.data
 
-        output_format = input_form.output_type.data
-        wrap_num = input_form.wrap_number.data
         insert_genes(session, g)
+
+    if settings_form.validate_on_submit():
+        output_format = settings_form.output_type.data
+        wrap_num = settings_form.wrap_number.data
 
     if wipe_form.wipe_submit.data: 
         wipe_genes()
@@ -53,6 +52,7 @@ def index():
                             db_message=db_message,
 
                             alignment_data=alignment_data, 
-                            input_form = input_form,
-                            wipe_form = wipe_form)
+                            gene_form=gene_form,
+                            settings_form=settings_form,
+                            wipe_form=wipe_form)
 

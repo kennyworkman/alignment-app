@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template
-from flask_bootstrap import Bootstrap, StaticCDN
+from flask_bootstrap import Bootstrap
 from dotenv import load_dotenv
 
 # Load ENV variables from .env file
@@ -15,7 +15,6 @@ def create_app():
 
     # Initialize Flask-Bootstrap extension
     bootstrap = Bootstrap(app)
-    app.config['BOOTSTRAP_SERVE_LOCAL']
 
     try:
         os.makedirs(app.instance_path)

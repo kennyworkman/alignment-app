@@ -1,38 +1,45 @@
-{% extends 'bootstrap/base.html' %}
-{% import 'bootstrap/wtf.html' as wtf %}
+{% from 'bootstrap/form.html' import render_form %}
 
-{% block title %}Gene Aligner{% endblock %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block navbar %}
-    <h1>Gene Alignment!</h1>
-{% endblock %}
-
-{% block content %}
-    <div class="col-md-4">
-        {{ wtf.quick_form(input_form) }}
-    </div>
-
-    <div class="-md-4">
-        {{ wtf.quick_form(wipe_form) }}
-    </div>
-
-    <div class="alert alert-info" role="alert">
-            {{ db_message }}
-    </div>
-
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    <title>Gene Aligner</title>
+  </head>
+  <body>
     <div class="container-fluid">
-    <pre>
-            {{ alignment_data }}
-    </pre>
+        <div class="card text-center">
+          <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Active</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Settings</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            {{ render_form(gene_form) }}
+            {{ render_form(settings_form) }}
+            {{ render_form(wipe_form) }}
+          </div>
+        </div>
     </div>
-
-{% endblock %}
-
-                {{ input_form.csrf_token }}
-                {{ render_field(input_form.gene_name) }}
-                {{ render_field(input_form.gene_content) }}
-                {{ render_field(input_form.output_type) }}
-                {{ render_field(input_form.wrap_number) }}
-
-                {{ input_form.align_button }}
-                {{ wipe_form.wipe_submit }}
+    <div class="container-fluid">
+        <p>
+            {{ db_message }}
+        </p>
+        <pre>
+            {{ alignment_data }}
+        </pre>
+    </div>
+  </body>
+</html>
