@@ -5,7 +5,7 @@ import subprocess
 import os
 
 CLUSTALO_PATH = '/usr/local/bin/clustalo' # Location of Clustalo exec on machine
-TEMP_PATH = './instance' # Temp file will be stored here
+TEMP_PATH = '/tmp' # Temp file will be stored here
 
 def create_temp():
     temp = NamedTemporaryFile(suffix=".fa", dir=TEMP_PATH, delete=False)  
@@ -52,11 +52,14 @@ def run_clustalo(file, output_type, wrap_number):
     except subprocess.CalledProcessError as e:
         return e.stderr 
  
-def capture_alignment(gene_dict, output_format, wrap_number):
+def capture_alignment(session, gene_dict):
     """ Pass dictionary mapping gene names to genomic content. Converts data into fasta format and passes this temporary file to the clustero aligner. Output information captured from standard output and returned as a string.
     """
     if len(gene_dict) < 2:
-        return "No Alignment"
+        return "Error: Need at least two genes for alignment!"
+    output_format = session['output_format']
+    wrap_number = session['wrap_num']
+
     create_temp_dir()
     fp = create_temp()
     write_temp(gene_dict, fp)

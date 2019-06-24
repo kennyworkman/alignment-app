@@ -57,9 +57,15 @@
     <div class="col-xs-12" style="height:50px;"></div>
     
     <div class="d-flex justify-content-center align-items-center">
-            <pre>
-                {{ alignment_data }}
-            </pre>
+                {% if aligned %}
+                    <pre>
+                        {{ alignment_data }}
+                    </pre>
+                {% else %}
+                    <p>
+                        Enter some genes to get started!
+                    </p>
+                {% endif %}
     </div>
 
     {{ bootstrap.load_js() }}
