@@ -1,0 +1,18 @@
+<form method="post">
+    <div class="container">
+        {{ align_form.csrf_token() }}
+        <div class="row">
+            <div class="col">
+               {{ render_field(align_form.gene1_name) }}                       
+               {{ render_field(align_form.gene1_content) }}                 
+            </div>
+            <div class="col">
+               {{ render_field(align_form.gene2_name) }}                       
+               {{ render_field(align_form.gene2_content) }} 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">{{ render_field(align_form.align_button) }}</div>
+        </div>
+    </div>             
+</form>

@@ -21,10 +21,15 @@ def close_db(e=None):
         db.close()
 
 def insert_genes(session, g):
-    """ Insert gene data into database. Pass session object as argument.     
+    """ Insert gene data into database. Gene data is extracted from the g object that is refreshed after the request has completed.
+
+    The session object provides a unqiue UserID that persists across multiple requests, allowing all user data to be uniquely queried.
     """
-    input_data = (session['user_id'], g.gene_name, g.gene_content)
-    cur = get_db().execute('INSERT INTO sequence (user_id, name, bases) VALUES (?,?,?)', input_data)
+    input_data = []
+    for gene_name, gene_content in g.gene_dict.items():
+        input_data.append((session['user_id'], gene_name, gene_content))
+
+    cur = get_db().executemany('INSERT INTO sequence (user_id, name, bases) VALUES (?,?,?)', input_data)
     get_db().commit()
     cur.close()
 

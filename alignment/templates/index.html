@@ -1,4 +1,4 @@
-{% from 'bootstrap/form.html' import render_form %}
+{% from 'bootstrap/form.html' import render_form, render_field %}
 
 <!doctype html>
 <html lang="en">
@@ -12,34 +12,57 @@
     <title>Gene Aligner</title>
   </head>
   <body>
-    <div class="container-fluid">
+
+    <div class="col-xs-12" style="height:50px;"></div>
+
+    <div class="text-center mb-4">
+        <h1 class="h3 mb-3">A Mediocre Gene Aligner</h1>
+        <p>
+            Minimalistic, tunable gene aligner. Powered by the awesome folks at <a href="http://www.clustal.org/omega/">Clustalo</a>.
+        </p>
+    </div>
+
+
+    <div class="container">
         <div class="card text-center">
           <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Settings</a>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="align-tab" data-toggle="tab" href="#align" role="tab">Align</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab">Settings</a>
+                </li>
             </ul>
           </div>
           <div class="card-body">
-            <h4 class="card-title">A Medicore Gene Aligner</h5>
-            <p class="card-text">Enter a pair of genes below!.</p>
-            {{ render_form(align_form) }}
-            <!-- render this to replace the other
-            {{ render_form(another_form) }} -->
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="align" role="tabpanel"> 
+                {% if aligned %}
+                    {% include 'another.html' %}
+                {% else %}
+                    {% include 'align.html' %}
+                {% endif %}
+              </div>
+              <div class="tab-pane fade" id="settings" role="tabpanel">
+                  <div class="container">
+                    {{ render_form(settings_form) }}
+                  </div> 
+              </div>
+            </div> 
           </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <p>
-            {{ db_message }}
-        </p>
-        <pre>
-            {{ alignment_data }}
-        </pre>
+
+    <div class="col-xs-12" style="height:50px;"></div>
+    
+    <div class="d-flex justify-content-center align-items-center">
+            <pre>
+                {{ alignment_data }}
+            </pre>
     </div>
+
+    {{ bootstrap.load_js() }}
   </body>
+
 </html>

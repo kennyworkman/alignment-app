@@ -25,11 +25,6 @@ def create_app():
     db.init_app(app)
 
     from . import frontend
-    app.register_blueprint(frontend.bp)
-
-    # Test page
-    @app.route('/hello')
-    def hello():
-        return render_template('hello_world.html') 
+    app.register(frontend.index)
 
     return app
