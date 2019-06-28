@@ -6,7 +6,7 @@ from uuid import uuid1
 from alignment.forms import AlignForm, AnotherForm, SettingsForm 
 from alignment.db import insert_genes, get_gene_dict, wipe_genes
 
-from alignment.make_fasta import capture_alignment
+from alignment.clustalo_align import capture_alignment
 
 bp = Blueprint('frontend', __name__)
 
@@ -43,30 +43,31 @@ def index():
         insert_genes(session, g)
 
     if another_form.wipe_button.data: 
-        wipe_genes()
-        session['aligned'] = False # This value will swtich form rendered in tempalte to the original
+        wipe_genes(session)
+        session['aligned'] = False 
         return redirect('/')
 
     if another_form.another_button.data:
-        # Manually check fields are not empty to allow seperate behavior among Submit Fields
-        if another_form.gene_name.data and another_form.gene_content.data: 
+        session['aligned'] = True 
+        if another_form.validate_on_submit():
             gene_name, gene_content = another_form.gene_name.data, another_form.gene_content.data
 
             g.gene_dict[gene_name] = gene_content
-            session['aligned'] = True 
             insert_genes(session, g)
 
 
-    if settings_form.apply_button.data and settings_form.validate_on_submit():
-        session['output_format'] = settings_form.output_type.data
-        session['wrap_num'] = settings_form.wrap_number.data
+    if settings_form.apply_button.data:
+        session['aligned'] = True 
+        if settings_form.validate_on_submit():
+            session['output_format'] = settings_form.output_type.data
+            session['wrap_num'] = settings_form.wrap_number.data
+            
 
     gene_dict = get_gene_dict(session)
     alignment_data = capture_alignment(session, gene_dict)   
 
     return render_template('index.html', 
                             aligned=session['aligned'],
-
                             alignment_data=alignment_data,
                             another_form=another_form,
                             align_form=align_form,

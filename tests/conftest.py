@@ -1,5 +1,5 @@
 import os
-from tempfile import NamedTemporaryFile
+from tempfile import mkstemp 
 
 import pytest
 
@@ -8,11 +8,13 @@ from alignment.db import init_db
 
 @pytest.fixture
 def app():
-    f = NamedTemporaryFile(delete=False, dir='/tmp')
+    # Temp file will house SQlite file for duration of the tests.
+    f_handle, f_path = mkstemp()
 
     app = create_app({
         'TESTING': True,
-        'DATABASE': f.name,
+        'DATABASE': f_path,
+        'WTF_CSRF_ENABLED': False,
     })
 
     with app.app_context():
@@ -20,8 +22,8 @@ def app():
 
     yield app 
 
-    f.close
-    os.unlink(f.name)
+    os.close(f_handle)
+    os.unlink(f_path)
 
 # Client fixture can make requests without running the server
 @pytest.fixture

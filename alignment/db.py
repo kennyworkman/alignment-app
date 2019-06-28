@@ -4,7 +4,8 @@ from flask import g, current_app
 from flask.cli import with_appcontext
 
 def get_db():
-# Save database connection in Request Context
+    """Returns a connection with the SQlite DB (a sqlite3 connection object). The connection is ensured to be the same throughout the lifetime of a request
+    """
     if 'db' not in g:
         g.db = sqlite3.connect(
             current_app.config['DATABASE'] 
@@ -14,14 +15,17 @@ def get_db():
     return g.db
 
 def close_db(e=None):
-# Close connection with db if in Request Context
+    """Removes database connection object from the request context and closes the connection.
+
+    (Note this function is called implicitly by app.teardown_appcontext, thus there is no need to manually call it)
+    """
     db = g.pop('db', None)
 
     if db is not None:
         db.close()
 
 def insert_genes(session, g):
-    """ Insert gene data into database. Gene data is extracted from the g object that is refreshed after the request has completed.
+    """Insert gene data into database. Gene data is extracted from the g object that is refreshed after the request has completed.
 
     The session object provides a unqiue UserID that persists across multiple requests, allowing all user data to be uniquely queried.
     """
@@ -34,15 +38,29 @@ def insert_genes(session, g):
     cur.close()
 
 def query_genes(session):
-    """ Pulls all sqlite3 Row Objects from database associated with user. Pass session object as argument. 
+    """Pulls all sqlite3 Row Objects from database associated with user. Pass session object as argument. 
     """
     cur = get_db().execute('SELECT * FROM sequence WHERE user_id = ?', (session['user_id'],))
     genes = cur.fetchall()
     cur.close()
     return genes
 
-def get_gene_dict(session):
+def wipe_genes(session):
+    """Deletes gene data from the database associated with a user. ID extracted from the session object.
     """
+    cur = get_db().execute('DELETE FROM sequence WHERE user_id = ?', (session['user_id'],))
+    get_db().commit()
+    cur.close()
+
+def wipe_all_genes():
+    """Deletes all gene data from the database irrespective of any user ID.
+    """
+    cur = get_db().execute('DELETE FROM sequence;')
+    get_db().commit()
+    cur.close()
+
+def get_gene_dict(session):
+    """Uses the query_genes function to generate a dictionary of all genes stored in the database that are associated with a particular user.
     """
     gene_objects = query_genes(session)
 
@@ -51,15 +69,12 @@ def get_gene_dict(session):
         gene_dict[gene_object['name']] = gene_object['bases']
     return gene_dict
 
-def wipe_genes():
-    """ Deletes gene data from the database.
-    """
-    cur = get_db().execute('DELETE FROM sequence')
-    get_db().commit()
-    cur.close()
 
 def init_db():
-# Initialize database based on schema
+    """Creates a file schema.sql in the instance folder within project root directory. Generates a table defined in the schema.sql file.
+
+    Note: This command is wrapped with the click package. It should be used from the command line.
+    """
     db = get_db()
 
     with current_app.open_resource('schema.sql') as f:
@@ -69,15 +84,16 @@ def init_db():
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
+    """Wrap the init_db as a click command that is callable from the command line.
+    """
     init_db()
     click.echo('Initialized the SQLite Database.')
 
 def init_app(app):
-    """Registers init command line with app;
-    Automatically closes database connection when request has finished
+    """Registers init_db with the app as a command line command.
+    Automatically closes database connection when request has finished, thus no need to manually call close_db
     """
     app.teardown_appcontext(close_db)
-    # Adds new command to command line 
-    app.cli.add_command(init_db_command)
+    app.cli.add_command(init_db_command) # Adds new command to command line 
 
 
