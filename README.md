@@ -8,23 +8,23 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/kennyworkman/alignment_app">
+  <a href="https://github.com/kennyworkman/alignment-app">
     <img src="logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Alignment App</h3>
 
   <p align="center">
-   A Flask-based web application for customizable gene alignment! 
+   A Flask-based web application for customizable gene alignment 
     <br />
     <a href="https://genealigner.site/"><strong>See hosted app »</strong></a>
     <br />
     <br />
     ·
-    <a href="https://github.com/kennyworkman/alignment_app/issues">Report Bug</a>
+    <a href="https://github.com/kennyworkman/alignment-app/issues">Report Bug</a>
     ·
-    <a href="https://github.com/kennyworkman/alignment_app/issues">Request Feature</a>
-    .
+    <a href="https://github.com/kennyworkman/alignment-app/issues">Request Feature</a>
+    ·
   </p>
 </p>
 
@@ -98,8 +98,8 @@ workon alignmentenv
 ```
 2. Clone the repo
 ```sh
-git clone https://github.com/kennyworkman/alignment_app
-cd alignment_app
+git clone https://github.com/kennyworkman/alignment-app
+cd alignment-app
 ```
 3. Install Python dependencies
 ```sh
@@ -129,7 +129,7 @@ Really looking to improve the user experience as long as new features don't get 
 
 Please [contribute](#contributing)!
 
-See the [open issues]( https://github.com/kennyworkman/alignment_app/issues) for a list of proposed features (and known issues).
+See the [open issues]( https://github.com/kennyworkman/alignment-app/issues) for a list of proposed features (and known issues).
 
 
 
@@ -158,7 +158,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Kenny Workman - kennybworkman@gmail.com
 
-Project Link - [https://github.com/kennyworkman/alignment_app](https://github.com/kennyworkman/alignment_app)
+Project Link - [https://github.com/kennyworkman/alignment-app](https://github.com/kennyworkman/alignment-app)
 
 
 
@@ -177,9 +177,9 @@ Some additional alignment tools.
 [build-shield]: https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square
 [build-url]: #
 [contributors-shield]: https://img.shields.io/badge/contributors-1-orange.svg?style=flat-square
-[contributors-url]: https://github.com/kennyworkman/alignment_app/graphs/contributors
+[contributors-url]: https://github.com/kennyworkman/alignment-app/graphs/contributors
 [license-shield]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [license-url]: https://choosealicense.com/licenses/mit
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kenny-workman-11151115a/
-[application-screenshot]: https://github.com/kennyworkman/alignment_app/blob/master/screen_shot.png
+[application-screenshot]: https://github.com/kennyworkman/alignment-app/blob/master/screen_shot.png
