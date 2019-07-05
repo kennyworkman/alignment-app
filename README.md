@@ -9,7 +9,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/kennyworkman/alignment_app">
-    <img src="http://fa2png.io/r/font-awesome/exchange/?color=00ffc9&margin=0&size=256" alt="Logo" width="80" height="80">
+    <img src="logo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Alignment App</h3>
@@ -24,6 +24,7 @@
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
     ·
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    .
   </p>
 </p>
 
@@ -49,21 +50,22 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Application Name Screen Shot][application-screenshot]](https://example.com)
+[![Application Name Screen Shot][application-screenshot]](https://genealigner.site)
 
-There are many great gene aligning services avaialable online, like * [BLAST](https://blast.ncbi.nlm.nih.gov), but I found the number of options intimidating as a new bioinformatician. I wanted to create a minimal platform that sacrificed little core functionality, yet made alignment quick and easy.
+There are many great gene aligning services avaialable online, like [BLAST](https://blast.ncbi.nlm.nih.gov), but I found the number of options intimidating as a new bioinformatician. I wanted to create a minimal platform that sacrificed little core functionality, yet made alignment quick and easy.
 
 Here's why:
 * There should be one, easy to remember web address for all alignment tasks
 * Users shouldn't have to decide amongst confusing settings/buttons to perform simple alignment
 * It was good personal practice to build and host a web app from scratch
 
-Of course, the minimalism offered by this app comes at the cost of the complexity demanded by some alignment tasks. So I'll be adding more options in the near future, so suggest changes by forking this repo and creating a pull request or opening an issue with the tag.
-
-In the mean time, check out some of the other feature-rich alignment options; a list of my favorites are listed in the acknowledgements. 
+Of course, the minimalism offered by this app comes at the cost of complexity. Check out some alternative tools in the acknolwedgements.
 
 ### Built With
-The bulk of this application is built on Flask, a lightweight Python framework that conforms to the WSGI server specification (Makes it easy to host with services such as Gunicorn and NGINX). Most frontend components were pulled straight from bootstrap, and the alignment functionality was outsourced from a Clustal binary.
+The bulk of this application is built on Flask, a lightweight Python framework that conforms to the WSGI server specification (Makes it easy to host with services such as Gunicorn and NGINX).
+
+Most frontend components were pulled straight from bootstrap, and the alignment functionality was outsourced from a Clustal binary.
+
 * [Flask](http://flask.pocoo.org)
 * [Bootstrap](https://getbootstrap.com)
 * [Clustal Omega](http://www.clustal.org/omega/)
@@ -123,7 +125,7 @@ Additional genes can be added easily after you've aligned your first two, and se
 <!-- ROADMAP -->
 ## Roadmap
 
-Really looking to improve the user experience as long as new features don't get in the way of ease of use. Remember, [BLAST](https://blast.ncbi.nlm.nih.gov), does what this app does, and much better! As long as you are comfortable with the tool and know where to click.
+Really looking to improve the user experience as long as new features don't get in the way of ease of use. Remember, [BLAST](https://blast.ncbi.nlm.nih.gov) does what this app does and much better! As long as you're comfortable with the tool and know where to click.
 
 Please [contribute](#contributing)!
 
@@ -180,4 +182,4 @@ Some additional alignment tools.
 [license-url]: https://choosealicense.com/licenses/mit
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kenny-workman-11151115a/
-[product-screenshot]: https://github.com/kennyworkman/alignment_app/master/screen_shot.png
+[application-screenshot]: https://github.com/kennyworkman/alignment_app/master/screen_shot.png
