@@ -17,13 +17,13 @@
   <p align="center">
    A Flask-based web application for customizable gene alignment! 
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>See hosted app »</strong></a>
+    <a href="https://genealigner.site/"><strong>See hosted app »</strong></a>
     <br />
     <br />
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/kennyworkman/alignment_app/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/kennyworkman/alignment_app/issues">Request Feature</a>
     .
   </p>
 </p>
@@ -129,7 +129,7 @@ Really looking to improve the user experience as long as new features don't get 
 
 Please [contribute](#contributing)!
 
-See the [open issues]( https://github.com/kennyworkman/alignment_app/issues)for a list of proposed features (and known issues).
+See the [open issues]( https://github.com/kennyworkman/alignment_app/issues) for a list of proposed features (and known issues).
 
 
 
@@ -158,7 +158,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Kenny Workman - kennybworkman@gmail.com
 
-Project Link: [https://github.com/kennyworkman/alignment_app](https://github.com/kennyworkman/alignment_app)
+Project Link - [https://github.com/kennyworkman/alignment_app](https://github.com/kennyworkman/alignment_app)
 
 
 
