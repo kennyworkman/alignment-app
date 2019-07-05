@@ -182,4 +182,4 @@ Some additional alignment tools.
 [license-url]: https://choosealicense.com/licenses/mit
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kenny-workman-11151115a/
-[application-screenshot]: https://github.com/kennyworkman/alignment_app/master/screen_shot.png
+[application-screenshot]: https://github.com/kennyworkman/alignment_app/blob/master/screen_shot.png
