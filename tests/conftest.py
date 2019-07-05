@@ -30,6 +30,10 @@ def app():
 def client(app):
     return app.test_client()
 
+@pytest.fixture
+def new_client(app):
+    return app.test_client()
+
 # Runner can call Click commands to simulate command line commands.
 @pytest.fixture
 def runner(app):

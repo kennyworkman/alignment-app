@@ -59,3 +59,33 @@ def test_anotherform(client):
     rv = post_gene_data(client, gene_data)
     assert b'Enter some genes' in rv, "Wipe button should get rid of alignment output."
     assert b'First Gene Name' in rv, "Wipe button should render original AlignForm"
+
+def test_settingsform(client):
+    """Ensure default settings functionality is in place,invalid wrap_numbers are blocked with an error, and that changes in both output_type and wrap_number are implemented.
+    """
+    gene_data = {'gene1_name': 'gene1',
+             'gene1_content': 'ATT',
+             'gene2_name': 'gene2',
+             'gene2_content':'TAA',
+             'align_button': 'Align!'}
+
+    rv = post_gene_data(client, gene_data)
+    assert b'CLUSTAL' in rv, "Default output setting should be clustal"
+
+    settings_data = {'output_type': 'stockholm',
+                     'wrap_number': 0,
+                     'apply_button': True}
+   
+    rv = post_gene_data(client, settings_data)
+    assert b'Nonzero' in rv, "Cannot submit a 0 wrap value."
+
+    settings_data['wrap_number'] = -1 
+    rv = post_gene_data(client, settings_data)
+    assert b'Positive' in rv, "Cannot submit a negative wrap value."
+                     
+    settings_data['wrap_number'] = 1 
+    rv = post_gene_data(client, settings_data)
+    assert b'1' in rv and b'STOCKHOLM' in rv, "Changes in settings are not being displayed in the alignment output."
+
+
+    

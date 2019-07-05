@@ -46,9 +46,3 @@ class SettingsForm(FlaskForm):
                 raise ValidationError(u'Must be Positive Number!')
             if field.data == 0:
                 raise ValidationError(u'Must be Positive Nonzero Number!')
-    
-
-class WipeForm(FlaskForm):
-    """ A form that is really a single button, indicating that the user wants to wipe all of his genes and start over.
-    """
-    wipe_button = SubmitField('Wipe') 

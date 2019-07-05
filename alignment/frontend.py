@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, render_template, abort, session, g, request, redirect
+    Blueprint, render_template, session, g, request, redirect
 )
 from uuid import uuid1
 
@@ -12,18 +12,16 @@ bp = Blueprint('frontend', __name__)
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
-
-    # Generates unique User ID to associate multiple requests with a single user.
+    
+    # Need a unique UID for database queries
     if 'user_id' not in session:
         session['user_id'] = str(uuid1())
     user_id = session['user_id']
     
-    # Session tracks whether genes have been submitted to decide which form template to render. Session also stores settings across requests.
-    session['aligned'] = False
     session['output_format'] = 'clustal'
     session['wrap_num'] = 60
 
-    # Genes for each request are retrieved from the g object.
+    # Don't want this info to stick around after the Request has been made, g will thus teardown
     if 'gene_dict' not in g:
         g.gene_dict = {}
 
@@ -42,9 +40,11 @@ def index():
         session['aligned'] = True # This value will switch the form rendered in the template
         insert_genes(session, g)
 
+
     if another_form.wipe_button.data: 
         wipe_genes(session)
         session['aligned'] = False 
+
         return redirect('/')
 
     if another_form.another_button.data:
@@ -56,18 +56,16 @@ def index():
             insert_genes(session, g)
 
 
-    if settings_form.apply_button.data:
-        session['aligned'] = True 
-        if settings_form.validate_on_submit():
-            session['output_format'] = settings_form.output_type.data
-            session['wrap_num'] = settings_form.wrap_number.data
-            
+    if settings_form.apply_button.data and settings_form.validate_on_submit():
+        session['output_format'] = settings_form.output_type.data
+        session['wrap_num'] = settings_form.wrap_number.data
 
-    gene_dict = get_gene_dict(session)
-    alignment_data = capture_alignment(session, gene_dict)   
+    query_genes = get_gene_dict(session)
+    alignment_data = capture_alignment(session, query_genes)   
+
 
     return render_template('index.html', 
-                            aligned=session['aligned'],
+                            aligned=session.get('aligned', None),
                             alignment_data=alignment_data,
                             another_form=another_form,
                             align_form=align_form,

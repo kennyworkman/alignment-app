@@ -1,2 +1,2 @@
 FLASK_APP=alignment
-FLASK_ENV=development
+FLASK_ENV=production
