@@ -1,11 +1,10 @@
 <form method="post">
-    <div class="container">
-            {{ another_form.csrf_token }}
-           {{ render_field(another_form.gene_name) }}                       
-           {{ render_field(another_form.gene_content) }}                 
-                <div class="row">
-                    <div class="col">{{ render_field(another_form.another_button) }}</div>
-                    <div class="col">{{ render_field(another_form.wipe_button) }}</div>
-                </div>
-    </div>             
+  <div class="container">
+    {{ another_form.csrf_token }} {{ render_field(another_form.gene_name) }} {{
+    render_field(another_form.gene_content) }}
+    <div class="row">
+      <div class="col">{{ render_field(another_form.another_button) }}</div>
+      <div class="col">{{ render_field(another_form.wipe_button) }}</div>
+    </div>
+  </div>
 </form>

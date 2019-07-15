@@ -1,81 +1,96 @@
 {% from 'bootstrap/form.html' import render_form, render_field %}
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
     <!-- Bootstrap CSS -->
     {{ bootstrap.load_css() }}
     <title>Gene Aligner</title>
   </head>
   <body>
-
     <div class="col-xs-12" style="height:50px;"></div>
 
     <div class="text-center mb-4">
-        <h1 class="h3 mb-3">A Mediocre Gene Aligner</h1>
-        
-        <div class="col-xs-12" style="height:20px;"></div>
-        <p>
-        
-            Minimalistic, tunable. Powered by <a href="http://www.clustal.org/omega/" target="_blank">Clustalo</a>.
-        </p>
-        <p>
-            Check out my <a href="https://github.com/kennyworkman" target="_blank">other projects</a>.
-        </p>
-        <div class="col-xs-12" style="height:20px;"></div>
+      <h1 class="h3 mb-3">A Mediocre Gene Aligner</h1>
+
+      <div class="col-xs-12" style="height:20px;"></div>
+      <p>
+        Minimalistic, tunable. Powered by
+        <a href="http://www.clustal.org/omega/" target="_blank">Clustalo</a>.
+      </p>
+      <p>
+        Check out my
+        <a href="https://github.com/kennyworkman" target="_blank"
+          >other projects</a
+        >.
+      </p>
+      <div class="col-xs-12" style="height:20px;"></div>
     </div>
 
-
     <div class="container">
-        <div class="card text-center">
-          <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" id="align-tab" data-toggle="tab" href="#align" role="tab">Align</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab">Settings</a>
-                </li>
-            </ul>
-          </div>
-          <div class="card-body">
-            <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="align" role="tabpanel"> 
-                {% if aligned %}
-                    {% include 'another.html' %}
-                {% else %}
-                    {% include 'align.html' %}
-                {% endif %}
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                id="align-tab"
+                data-toggle="tab"
+                href="#align"
+                role="tab"
+                >Align</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                id="settings-tab"
+                data-toggle="tab"
+                href="#settings"
+                role="tab"
+                >Settings</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="align" role="tabpanel">
+              {% if aligned %} {% include 'another.html' %} {% else %} {%
+              include 'align.html' %} {% endif %}
+            </div>
+            <div class="tab-pane fade" id="settings" role="tabpanel">
+              <div class="container">
+                {{ render_form(settings_form) }}
               </div>
-              <div class="tab-pane fade" id="settings" role="tabpanel">
-                  <div class="container">
-                    {{ render_form(settings_form) }}
-                  </div> 
-              </div>
-            </div> 
+            </div>
           </div>
         </div>
+      </div>
     </div>
 
     <div class="col-xs-12" style="height:50px;"></div>
-    
+
     <div class="d-flex justify-content-center align-items-center">
-                {% if aligned %}
-                    <pre>
+      {% if aligned %}
+      <pre>
                         {{ alignment_data }}
-                    </pre>
-                {% else %}
-                    <p>
-                        Enter some genes to get started!
-                    </p>
-                {% endif %}
+                    </pre
+      >
+      {% else %}
+      <p>
+        Enter some genes to get started!
+      </p>
+      {% endif %}
     </div>
 
     {{ bootstrap.load_js() }}
   </body>
-
 </html>
