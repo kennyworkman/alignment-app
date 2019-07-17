@@ -6,6 +6,9 @@
 
 from alignment import create_app
 
+# This is the entrypoint.
+app = create_app()
+
 # Calling module from command line allows convenient debug/production mode
 if __name__ == "__main__":
     app = create_app()
