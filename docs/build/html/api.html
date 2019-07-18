@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>API &#8212; Alignment 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Getting Started" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="api">
+<span id="id1"></span><h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
+<p>This part of the documentation covers the application interface.
+For functional dependencies on external libraries, links to relevant
+documentation is provided.</p>
+<div class="section" id="the-app-factory">
+<h2>The App Factory<a class="headerlink" href="#the-app-factory" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="alignment.create_app">
+<code class="sig-prename descclassname">alignment.</code><code class="sig-name descname">create_app</code><span class="sig-paren">(</span><em class="sig-param">test_config=None</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.create_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates and configures an instance of the Flask application.</p>
+<p>To load a development or production configuration, leave out the optional
+dictionary parameter. Only use this to override the default configs for
+something like testing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>test_config</strong> (<em>dict</em><em> or </em><em>None</em>) – An optional dictionary of configuration mappings</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a Flask() instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="the-frontend">
+<h2>The Frontend<a class="headerlink" href="#the-frontend" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="view-function">
+<h3>View Function<a class="headerlink" href="#view-function" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="alignment.frontend.index">
+<code class="sig-prename descclassname">alignment.frontend.</code><code class="sig-name descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#alignment.frontend.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Processes user requests and renders templates to defined endpoints.</p>
+<p>This is the workhorse of application. See the <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/quickstart/#routing">Flask Documentation</a> on views
+to read more.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A Flask render_template() function</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="the-forms">
+<h3>The Forms<a class="headerlink" href="#the-forms" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="alignment.forms.AlignForm">
+<em class="property">class </em><code class="sig-prename descclassname">alignment.forms.</code><code class="sig-name descname">AlignForm</code><span class="sig-paren">(</span><em class="sig-param">formdata=&lt;object object&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.forms.AlignForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial alignment form that is rendered when the user first logs in.</p>
+<p>An instance of a WTForm that takes a pair of gene names and data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gene1_name</strong> – A WTForm StringField</p></li>
+<li><p><strong>gene1_content</strong> – A WTForm StringField</p></li>
+<li><p><strong>gene2_name</strong> – A WTForm StringField</p></li>
+<li><p><strong>gene2_content</strong> – A WTForm StringField</p></li>
+<li><p><strong>align_button</strong> – A WTForm SubmitField</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="alignment.forms.AnotherForm">
+<em class="property">class </em><code class="sig-prename descclassname">alignment.forms.</code><code class="sig-name descname">AnotherForm</code><span class="sig-paren">(</span><em class="sig-param">formdata=&lt;object object&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.forms.AnotherForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Secondary form that will only add a single gene to the existing stack.</p>
+<p>Rendered only after the initial form is submitted to avoid confusion and
+indicate that additional genes can be aligned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gene_name</strong> – A WTForm StringField</p></li>
+<li><p><strong>gene_content</strong> – A WTForm StringField</p></li>
+<li><p><strong>another_button</strong> – A WTForm SubmitField</p></li>
+<li><p><strong>wipe_button</strong> – A WTForm SubmitField</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="alignment.forms.SettingsForm">
+<em class="property">class </em><code class="sig-prename descclassname">alignment.forms.</code><code class="sig-name descname">SettingsForm</code><span class="sig-paren">(</span><em class="sig-param">formdata=&lt;object object&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.forms.SettingsForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Form to change output settings (file output type or line wrap number).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_type</strong> – A WTForm SelectField</p></li>
+<li><p><strong>wrap_number</strong> – A WTForm IntegerField</p></li>
+<li><p><strong>apply_button</strong> – A WTForm SubmitField</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="alignment-functionality">
+<h2>Alignment Functionality<a class="headerlink" href="#alignment-functionality" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="alignment.clustalo_align.run_clustalo">
+<code class="sig-prename descclassname">alignment.clustalo_align.</code><code class="sig-name descname">run_clustalo</code><span class="sig-paren">(</span><em class="sig-param">temp_path</em>, <em class="sig-param">output_type</em>, <em class="sig-param">wrap_number</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.clustalo_align.run_clustalo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a clustalo command in a subprocess and captures the output.</p>
+<p>This function takes a fasta (.fa) file containing genomic information and
+performs an alignment on the data using the output_type and wrap_number 
+parameters. The output of the process, whether it is functional alignment 
+data or any error printed to the stderr, will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>temp_path</strong> – The file path with the .fa file containing the genomic</p>
+</dd>
+</dl>
+<p>information to align.
+:type temp_path: str
+:param output_type: A key in the OUTUPUT_DICT dictionary that corresponds to
+a clustalo output type.
+:type output_type: str
+:param wrap_number: A number that specifies how long each output line should
+be. Must be positive, nonzero.
+:type wrap_number: int
+:return: Binary data from the result of the process, either from the stdout
+or stderr</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.clustalo_align.capture_alignment">
+<code class="sig-prename descclassname">alignment.clustalo_align.</code><code class="sig-name descname">capture_alignment</code><span class="sig-paren">(</span><em class="sig-param">session</em>, <em class="sig-param">gene_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.clustalo_align.capture_alignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a dictionary of gene data and captures the alignment.</p>
+<p>The dictionary should have the following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;gene1&#39;</span><span class="p">:</span> <span class="s1">&#39;ATTT&#39;</span><span class="p">,</span> 
+ <span class="s1">&#39;gene2&#39;</span><span class="p">:</span><span class="s1">&#39;CCC&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>It’s contents will be converted to fasta files and passed to a Clustalo
+binary through a subprocess. The stdout (or stderr) is collected and 
+returned as binary data.</p>
+<p>The passed session object provides the command line options for the clustalo
+executable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session</strong> – A Flask session object</p></li>
+<li><p><strong>gene_dict</strong> (<em>int</em>) – A dictionary mapping gene names to data</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Binary alignment output data</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="database-api">
+<h2>Database API<a class="headerlink" href="#database-api" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="alignment.db.get_db">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">get_db</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.get_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a connection with the SQLite database.</p>
+<p>If a connection already exists in the current request (accessed through the
+Flask g object), the existing connection will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>an sqlite3 Connection object that can represent the database.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.db.close_db">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">close_db</code><span class="sig-paren">(</span><em class="sig-param">e=None</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.close_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes a connection with the SQLite database.</p>
+<p>This function is called implicitly by app.teardown_appcontext when a
+request has finished. There is therefore no need to explicitly call it.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.db.insert_genes">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">insert_genes</code><span class="sig-paren">(</span><em class="sig-param">session</em>, <em class="sig-param">g</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.insert_genes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts gene data from the current app context into the SQLite database.</p>
+<p>Gene data is extracted from the gene_dict attribute of the g object
+A UUID is extracted from the Flask session object, that persists across all
+requests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session</strong> – Flask session object</p></li>
+<li><p><strong>g</strong> – Flask g object</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.db.query_genes">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">query_genes</code><span class="sig-paren">(</span><em class="sig-param">session</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.query_genes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Querys all genes associated with a unique user.</p>
+<p>The UUID is stored and extracted from the Flask Session object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>session</strong> – Flask session object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of of sqlite3 Row objects, which have intuitive</p>
+</dd>
+</dl>
+<p>tuple-esque behavior. <a class="reference external" href="https://docs.python.org/2/library/sqlite3.html#row-object/">Docs for sqlite3 Rows’</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.db.wipe_genes">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">wipe_genes</code><span class="sig-paren">(</span><em class="sig-param">session</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.wipe_genes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes all genes associated with a unique UUID from the session.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>session</strong> – Flask session object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.db.wipe_all_genes">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">wipe_all_genes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.wipe_all_genes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes all gene data from the database (ignores UUID identifier).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.db.get_gene_dict">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">get_gene_dict</code><span class="sig-paren">(</span><em class="sig-param">session</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.get_gene_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary of queried genes based on the session’s unique UUID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>session</strong> – Flask session object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.db.init_db">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">init_db</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.init_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes database as defined in the schema.sql file.</p>
+<p>The schema.sql file is located in the alignment package’s root
+directory.</p>
+<p>This command is wrapped with the click package. It should be used from the
+command line when configuring a new app.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.db.init_db_command">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">init_db_command</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.init_db_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wraps the init_db() function as a click command command.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="alignment.db.init_app">
+<code class="sig-prename descclassname">alignment.db.</code><code class="sig-name descname">init_app</code><span class="sig-paren">(</span><em class="sig-param">app</em><span class="sig-paren">)</span><a class="headerlink" href="#alignment.db.init_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers Flask app instance with ‘init-db’ command and adds close_db()
+to the app.teardown_appcontext() stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>app</strong> – a Flask instance</p>
+</dd>
+</dl>
+<p>This should never be referenced directly by the user. The app is registered
+in the __init__ module.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Alignment</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Getting Started</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-app-factory">The App Factory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-frontend">The Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alignment-functionality">Alignment Functionality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#database-api">Database API</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation.html" title="previous chapter">Getting Started</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Kenny Workman.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

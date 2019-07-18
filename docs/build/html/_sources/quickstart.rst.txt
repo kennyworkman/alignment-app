@@ -1,0 +1,57 @@
+.. _quickstart:
+
+Getting Started
+===============
+
+Want to run the app on your machine?
+To get a local copy up and running follow these simple example steps.
+
+Prerequisites
+-------------
+
+You'll need the following things to get started:
+* python 3.7
+* virtualenv
+* virtualenvwrapper
+* clustalo 
+
+.. code-block:: shell
+
+  pip install virtualenv virtualenvwrapper
+
+Grab your Clustal Omega binary (clustal) `here <http://www.clustal.org/omega/>`_
+
+Installation
+------------
+
+1. Set up your environment with virtualenvwrapper
+
+.. code-block:: shell
+
+  mkvirtualenv alignmentenv
+  workon alignmentenv
+
+2. Clone the repo
+
+.. code-block:: shell
+
+  git clone https://github.com/kennyworkman/alignment-app
+  cd alignment-app
+
+3. Install Python dependencies
+
+.. code-block:: shell
+
+  pip install -r requirements.txt
+
+4. Initialize SQLite Databse
+
+.. code-block:: shell
+
+  flask init-db
+
+5. Run the app locally! (Go to localhost:5000 in your browser to see it)
+
+.. code-block:: shell
+
+  flask run
