@@ -88,6 +88,7 @@ You'll need the following things to get started:
 pip install virtualenv virtualenvwrapper
 ```
 Grab your Clustal Omega binary (clustal) [here](http://www.clustal.org/omega/)
+(**Make sure you configure your Clustal Omega path in the clustalo_align module!**)
 
 ### Installation
 
