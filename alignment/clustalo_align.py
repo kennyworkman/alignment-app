@@ -11,7 +11,11 @@ import sys
 import os
 
 # TODO: Introduce a config file for these options
-CLUSTALO_PATH = '../bin/clustalo'  # Location of binary within package
+
+# Location of binary within package
+# This root bin directory is for the docker image build.
+CLUSTALO_PATH = '/bin/clustalo'
+
 TEMP_DIR = '/tmp'  # Temp file will be stored here
 
 # Dictionary mapping command line output flags to more readable strings
@@ -94,8 +98,7 @@ def run_clustalo(temp_path, output_type, wrap_number):
     try:
         output_arg = OUTPUT_DICT[output_type]
         wrap_arg = "--wrap=" + str(wrap_number)
-        exec_path = os.path.join(os.path.abspath(sys.path[0]), CLUSTALO_PATH)
-        data = subprocess.run([exec_path, "-i", temp_path,
+        data = subprocess.run([CLUSTALO_PATH, "-i", temp_path,
                                output_arg, wrap_arg, "--residuenumber"],
                               capture_output=True, check=True)
         return data.stdout
